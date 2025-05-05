@@ -7,7 +7,7 @@ function App() {
     const [editId, setEditId] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/fruits")
+        axios.get("https://fruits-todo.onrender.com/fruits")
             .then(response => {
                 console.log(response.data);
                 setfruit(response.data); // Update state with received data
@@ -23,7 +23,7 @@ function App() {
     }
 
     function add() {
-        axios.post("http://localhost:5000/addfruit", { newfruit: entervalue })
+        axios.post("https://fruits-todo.onrender.com/addfruit", { newfruit: entervalue })
             .then(response => {
                 setfruit([...fruit, response.data]); // Use the full saved fruit
                 setentervalue("");
@@ -45,7 +45,7 @@ function App() {
 
     function update() {
         const updatedFruit = { name: entervalue };
-        axios.put(`http://localhost:5000/updatefruit/${editId}`, updatedFruit)
+        axios.put(`https://fruits-todo.onrender.com/${editId}`, updatedFruit)
             .then(response => {
                 const newFruitList = fruit.map(item =>
                     item._id === editId ? response.data : item
@@ -61,7 +61,7 @@ function App() {
     }
 
     function remove(id) {
-        axios.delete(`http://localhost:5000/deletefruit/${id}`)
+        axios.delete(`https://fruits-todo.onrender.com/${id}`)
             .then(() => {
                 const newFruitList = fruit.filter(item => item._id !== id);
                 setfruit(newFruitList);
